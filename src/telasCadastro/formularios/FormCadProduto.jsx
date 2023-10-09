@@ -1,76 +1,72 @@
 import { Button, Container, Form, Row, Col, FloatingLabel } from "react-bootstrap";
 import { useState } from "react";
-export default function FormCadCProduto(props) {
-    const estadoinicialProduto = {
-        nome:'',
-        estoque:'',
-        categoria:'',
-        fornecedor:''
-    }
 
-    const [produto, setProduto] = useState(estadoinicialProduto);
+export default function FormCadProduto(props) {
+    const produtoVazio = {
+        codigo: '',
+        nome: '',
+        preco: 0.0,
+        quantidadeEstoque: 0
+    };
 
+    const estadoInicialProduto = props.produtoParaEdicao;
+    const [produto, setProduto] = useState(estadoInicialProduto);
     const [formValidado, setFormValidado] = useState(false);
 
-    function manipularMundancas(evento) {
+    function manipularMudancas(evento) {
         const componente = evento.currentTarget;
-        setProduto({...produto,[componente.name]:componente.value});
+        setProduto({ ...produto, [componente.name]: componente.value });
     }
 
     function manipularSubmissao(evento) {
-        const form = evento.currentTarget; 
-        if (form.checkValidity()){
-            props.setListaProdutos([...props.listaProdutos,produto]);
-            setProduto(estadoinicialProduto);
+        const form = evento.currentTarget;
+        if (form.checkValidity()) {
+            if (!props.modoEdicao) {
+                props.setListaProdutos([...props.listaProdutos, produto]);
+                alert("Produto cadastrado com sucesso!");
+            } else {
+                props.setListaProdutos([
+                    ...props.listaProdutos.filter((itemProduto) => itemProduto.codigo !== produto.codigo),
+                    produto
+                ]);
+                props.setModoEdicao(false);
+                props.setProdutoParaEdicao(produtoVazio);
+                alert("Produto alterado com sucesso!");
+            }
+            props.setExibirFormulario(false);
+            setProduto(produtoVazio);
             setFormValidado(false);
-        }
-        else{
+        } else {
             setFormValidado(true);
         }
 
         evento.stopPropagation();
         evento.preventDefault();
     }
+
     return (
-        <Container validated={formValidado} onSubmit={manipularSubmissao} style={{marginTop: '20px'}}>
-            <Form>
+        <Container style={{marginTop: '20px'}}>
+            <Form noValidate validated={formValidado} onSubmit={manipularSubmissao}>
                 <Row>
                     <Col>
                         <Form.Group>
                             <FloatingLabel
-                                controlId="floatingInput"
+                                label="Código:"
+                                className="mb-3">
+                                <Form.Control type="text" placeholder="Código do produto" id="codigo" name="codigo" required value={produto.codigo} onChange={manipularMudancas}/>
+                            </FloatingLabel>
+                            <Form.Control.Feedback type="invalid">Informe o código!</Form.Control.Feedback>
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group>
+                            <FloatingLabel
                                 label="Nome:"
                                 className="mb-3"
                             >
-                                <Form.Control type="text" placeholder="Informe o nome completo" id="nome" name="nome" required value={produto.nome} onChange={manipularMundancas} />
+                                <Form.Control type="text" placeholder="Nome do produto" id="nome" name="nome" required value={produto.nome} onChange={manipularMudancas}/>
                             </FloatingLabel>
-                            <Form.Control.Feedback type="invalid">Informe o nome da categoria</Form.Control.Feedback>
-                        </Form.Group>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={6}>
-                        <Form.Group>
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Estoque:"
-                                className="mb-3"
-                            >
-                                <Form.Control type="text" placeholder="Informe a quantidade no estoque" id="estoque" name="estoque" required value={produto.estoque} onChange={manipularMundancas} />
-                            </FloatingLabel>
-                            <Form.Control.Feedback type="invalid">Informe a quantidade no estoque</Form.Control.Feedback>
-                        </Form.Group>
-                    </Col>
-                    <Col md={6}>
-                        <Form.Group>
-                            <FloatingLabel
-                                controlId="floatingInput"
-                                label="Categoria do Produto:"
-                                className="mb-3"
-                            >
-                                <Form.Control type="text" placeholder="Informe a quantidade no estoque" id="categoria" name="categoria" required value={produto.categoria} onChange={manipularMundancas} />
-                            </FloatingLabel>
-                            <Form.Control.Feedback type="invalid">Informe a categoria do produto</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">Informe o nome!</Form.Control.Feedback>
                         </Form.Group>
                     </Col>
                 </Row>
@@ -78,24 +74,40 @@ export default function FormCadCProduto(props) {
                     <Col>
                         <Form.Group>
                             <FloatingLabel
-                                controlId="floatingInput"
-                                label="Fornecedor:"
+                                label="Preço:"
                                 className="mb-3"
                             >
-                                <Form.Control type="text" placeholder="Informe o nome do fornecedor" id="fornecedor" name="fornecedor" required value={produto.fornecedor} onChange={manipularMundancas}/>
+                                <Form.Control type="number" step="0.01" placeholder="Preço do produto" id="preco" name="preco" required value={produto.preco} onChange={manipularMudancas}/>
                             </FloatingLabel>
-                            <Form.Control.Feedback type="invalid">Informe o fornecedor</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">Informe o preço!</Form.Control.Feedback>
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group>
+                            <FloatingLabel
+                                label="Quantidade em Estoque:"
+                                className="mb-3"
+                            >
+                                <Form.Control type="number" placeholder="Quantidade em estoque" id="quantidadeEstoque" name="quantidadeEstoque" required value={produto.quantidadeEstoque} onChange={manipularMudancas}/>
+                            </FloatingLabel>
+                            <Form.Control.Feedback type="invalid">Informe a quantidade em estoque!</Form.Control.Feedback>
                         </Form.Group>
                     </Col>
                 </Row>
                 <Row>
                     <Col md={6} offset={5} className="d-flex justify-content-end">
-                        <Button type="submit" variant={"primary"}>Cadastrar</Button>
+                        <Button type="submit" variant={props.modoEdicao ? "warning" : "primary"}>
+                            {props.modoEdicao ? "Alterar" : "Cadastrar"}
+                        </Button>
                     </Col>
                     <Col md={6} offset={5}>
                         <Button type="button" variant={"secondary"} onClick={()=>{
-                            props.setExibirFormulario(false)
-                        }}>Voltar</Button>
+                            props.setModoEdicao(false);
+                            props.setProdutoParaEdicao(produtoVazio); 
+                            props.setExibirFormulario(false);
+                        }}>
+                            Voltar
+                        </Button>
                     </Col>
                 </Row>
             </Form>

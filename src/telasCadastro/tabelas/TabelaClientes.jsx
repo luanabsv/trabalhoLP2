@@ -67,7 +67,7 @@ export default function TabelaClientes(props) {
                                         editarCliente(cliente);
                                     }
 
-                                    } variant="warning">
+                                    } variant="warning"  style={{marginLeft: '5px'}}>
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             width="16"
                                             height="16"

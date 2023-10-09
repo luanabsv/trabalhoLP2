@@ -9,7 +9,7 @@ export default function Pagina(props) {
             <Menu />
             <div>
                 {
-                    // filhos da página
+
                 }
                 {props.children} 
             </div>

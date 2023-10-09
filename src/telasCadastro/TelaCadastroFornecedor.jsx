@@ -1,38 +1,43 @@
 import { Container } from "react-bootstrap";
 import Pagina from "../templates/Pagina";
-import { useState } from "react";
 import FormCadFornecedor from "./formularios/FormCadFornecedor";
-import TabelaFornecedores from "./tabelas/TabelaFornecedores"
+import TabelaFornecedores from "./tabelas/TabelaFornecedores";
+import { useState } from "react";
 
-export default function TelaCadastroFornecedores(props) {
+export default function TelaCadastroFornecedor(props) {
     const [exibirFormulario, setExibirFormulario] = useState(false);
     const [listaFornecedores, setListaFornecedores] = useState([]);
-    const [fonecedorParaEdicao, setFornecedorParaEdicao] = useState({
-        nome: '',
+    const [fornecedorParaEdicao, setFornecedorParaEdicao] = useState({
         cnpj: '',
-        email: '',
-        categoria: '',
-        telefone: ''
+        nome: '',
+        endereco: '',
+        telefone: '',
+        email: ''
     });
     const [modoEdicao, setModoEdicao] = useState(false);
+    
     return (
         <Container>
             <Pagina>
                 {
-                    exibirFormulario ? <FormCadFornecedor setExibirFormulario={setExibirFormulario}
-                                                            listaFornecedores={listaFornecedores}
-                                                            setListaFornecedores={setListaFornecedores}
-                                                            setFornecedorParaEdicao={setFornecedorParaEdicao}
-                                                            fonecedorParaEdicao={fonecedorParaEdicao}
-                                                            modoEdicao={modoEdicao}
-                                                            setModoEdicao={setModoEdicao}/> 
-                                    : <TabelaFornecedores setExibirFormulario={setExibirFormulario}
-                                                            listaFornecedores={listaFornecedores}
-                                                            setListaFornecedores={setListaFornecedores}
-                                                            setFornecedorParaEdicao={setFornecedorParaEdicao}
-                                                            fonecedorParaEdicao={fonecedorParaEdicao}
-                                                            modoEdicao={modoEdicao}
-                                                            setModoEdicao={setModoEdicao}/>
+                    exibirFormulario ? <FormCadFornecedor 
+                                            setExibirFormulario={setExibirFormulario} 
+                                            listaFornecedores={listaFornecedores}
+                                            setListaFornecedores={setListaFornecedores}
+                                            setFornecedorParaEdicao={setFornecedorParaEdicao}
+                                            fornecedorParaEdicao={fornecedorParaEdicao}
+                                            modoEdicao={modoEdicao}
+                                            setModoEdicao={setModoEdicao}
+                                        /> 
+                                    : <TabelaFornecedores 
+                                            setExibirFormulario={setExibirFormulario} 
+                                            listaFornecedores={listaFornecedores}
+                                            setListaFornecedores={setListaFornecedores}
+                                            fornecedorParaEdicao={fornecedorParaEdicao}
+                                            setFornecedorParaEdicao={setFornecedorParaEdicao}
+                                            modoEdicao={modoEdicao}
+                                            setModoEdicao={setModoEdicao}
+                                    />
                 }
             </Pagina>
         </Container>

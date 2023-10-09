@@ -1,22 +1,41 @@
 import { Container } from "react-bootstrap";
 import Pagina from "../templates/Pagina";
-import { useState } from "react";
-import FormCadCategoria from "./formularios/FormCadCategorias"
+import FormCadCategoria from "./formularios/FormCadCategorias";
 import TabelaCategorias from "./tabelas/TabelaCategorias";
+import { useState } from "react";
 
-export default function TelaCadastroCategorias(props) {
+export default function TelaCadastroCategoria(props) {
     const [exibirFormulario, setExibirFormulario] = useState(false);
     const [listaCategorias, setListaCategorias] = useState([]);
+    const [categoriaParaEdicao, setCategoriaParaEdicao] = useState({
+        id: '',
+        nome: '',
+        descricao: ''
+    });
+    const [modoEdicao, setModoEdicao] = useState(false);
+    
     return (
         <Container>
             <Pagina>
                 {
-                    exibirFormulario ? <FormCadCategoria setExibirFormulario={setExibirFormulario}
-                                                            listaCategorias={listaCategorias}
-                                                            setListaCategorias={setListaCategorias}/> 
-                                    : <TabelaCategorias setExibirFormulario={setExibirFormulario}
-                                                            listaCategorias={listaCategorias}
-                                                            setListaCategorias={setListaCategorias}/>
+                    exibirFormulario ? <FormCadCategoria 
+                                            setExibirFormulario={setExibirFormulario} 
+                                            listaCategorias={listaCategorias}
+                                            setListaCategorias={setListaCategorias}
+                                            setCategoriaParaEdicao={setCategoriaParaEdicao}
+                                            categoriaParaEdicao={categoriaParaEdicao}
+                                            modoEdicao={modoEdicao}
+                                            setModoEdicao={setModoEdicao}
+                                        /> 
+                                    : <TabelaCategorias 
+                                            setExibirFormulario={setExibirFormulario} 
+                                            listaCategorias={listaCategorias}
+                                            setListaCategorias={setListaCategorias}
+                                            categoriaParaEdicao={categoriaParaEdicao}
+                                            setCategoriaParaEdicao={setCategoriaParaEdicao}
+                                            modoEdicao={modoEdicao}
+                                            setModoEdicao={setModoEdicao}
+                                    />
                 }
             </Pagina>
         </Container>
