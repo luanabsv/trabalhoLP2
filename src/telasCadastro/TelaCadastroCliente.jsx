@@ -6,7 +6,6 @@ import { useState } from "react";
 
 export default function TelaCadastroCliente(props) {
     const [exibirFormulario, setExibirFormulario] = useState(false);
-    const [listaClientes, setListaClientes] = useState([]);
     const [clienteParaEdicao, setClienteParaEdicao] = useState({
         cpf:'',
         nome:'',
@@ -15,9 +14,7 @@ export default function TelaCadastroCliente(props) {
         bairro:'',
         cidade:'',
         uf:'SP',
-        cep:'',
-        telefone: '',
-        genero: 'Feminino'
+        cep:''
     });
     const [modoEdicao, setModoEdicao] = useState(false);
     
@@ -25,20 +22,19 @@ export default function TelaCadastroCliente(props) {
         <Container>
             <Pagina>
                 {
-                    exibirFormulario ? <FormCadCliente setExibirFormulario={setExibirFormulario} 
-                                                        listaClientes={listaClientes}
-                                                        setListaClientes={setListaClientes}
-                                                        setClienteParaEdicao={setClienteParaEdicao}
-                                                        clienteParaEdicao={clienteParaEdicao}
+                    exibirFormulario ? <FormCadCliente exibirFormulario={setExibirFormulario} 
+                                                       clienteParaEdicao={clienteParaEdicao}
+                                                       setClienteParaEdicao={setClienteParaEdicao}
                                                        modoEdicao={modoEdicao}
-                                                       setModoEdicao={setModoEdicao}/> 
-                                    : <TabelaClientes setExibirFormulario={setExibirFormulario} 
-                                                        listaClientes={listaClientes}
-                                                        setListaClientes={setListaClientes}
-                                                        clienteParaEdicao={clienteParaEdicao}
-                                                        setClienteParaEdicao={setClienteParaEdicao}
-                                                        modoEdicao={modoEdicao}
-                                                        setModoEdicao={setModoEdicao}/>
+                                                       setModoEdicao={setModoEdicao}
+                                                       /> 
+                                     : 
+                                      <TabelaClientes exibirFormulario={setExibirFormulario}
+                                                      clienteParaEdicao={clienteParaEdicao}
+                                                      setClienteParaEdicao={setClienteParaEdicao}
+                                                      modoEdicao={modoEdicao}
+                                                      setModoEdicao={setModoEdicao}
+                                                      />
                 }
             </Pagina>
         </Container>
