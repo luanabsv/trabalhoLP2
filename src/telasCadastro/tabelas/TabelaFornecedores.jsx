@@ -34,7 +34,7 @@ export default function TabelaFornecedores(props) {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>ID</th>
+            <th>CNPJ</th>
             <th>Nome</th>
             <th>Endereço</th>
             <th>Telefone</th>
@@ -44,8 +44,8 @@ export default function TabelaFornecedores(props) {
         <tbody>
           {listaFornecedores.map((fornecedor) => {
             return (
-              <tr key={fornecedor.id}>
-                <td>{fornecedor.id}</td>
+              <tr key={fornecedor.cnpj}>
+                <td>{fornecedor.cnpj}</td>
                 <td>{fornecedor.nome}</td>
                 <td>{fornecedor.endereco}</td>
                 <td>{fornecedor.telefone}</td>

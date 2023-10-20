@@ -5,7 +5,7 @@ import { adicionarFornecedor, atualizarFornecedor } from "../../redux/fornecedor
 
 export default function FormCadFornecedor(props) {
   const fornecedorVazio = {
-    id: '',
+    cnpj: '',
     nome: '',
     endereco: '',
     telefone: '',
@@ -45,6 +45,24 @@ export default function FormCadFornecedor(props) {
   return (
     <Container>
       <Form noValidate validated={formValidado} onSubmit={manipularSubmissao}>
+      <Row>
+          <Col>
+            <Form.Group>
+              <Form.Label>CNPJ Fornecedor</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="CNPJ"
+                name="cnpj"
+                value={fornecedor.cnpj}
+                onChange={manipularMudancas}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                Informe o CNPJ do fornecedor!
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Col>
+        </Row>
         <Row>
           <Col>
             <Form.Group>

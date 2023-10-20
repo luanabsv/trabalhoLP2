@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import ESTADO from '../recursos/estado';
 const produtoSlice = createSlice({
   name: 'produto',
   initialState: {
@@ -12,10 +12,10 @@ const produtoSlice = createSlice({
       state.listaProdutos.push(action.payload);
     },
     removerProduto: (state, action) => {
-      state.listaProdutos = state.listaProdutos.filter(produto => produto.id !== action.payload.id);
+      state.listaProdutos = state.listaProdutos.filter(produto => produto.cod !== action.payload.cod);
     },
     atualizarProduto: (state, action) => {
-      const listaTemporariaProdutos = state.listaProdutos.filter(produto => produto.id !== action.payload.id);
+      const listaTemporariaProdutos = state.listaProdutos.filter(produto => produto.cod !== action.payload.cod);
       state.listaProdutos = [...listaTemporariaProdutos, action.payload];
     }
   }

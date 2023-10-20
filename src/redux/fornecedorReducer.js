@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import ESTADO from '../recursos/estado';
 
 const fornecedorSlice = createSlice({
   name: 'fornecedor',
@@ -12,10 +13,10 @@ const fornecedorSlice = createSlice({
       state.listaFornecedores.push(action.payload);
     },
     removerFornecedor: (state, action) => {
-      state.listaFornecedores = state.listaFornecedores.filter(fornecedor => fornecedor.id !== action.payload.id);
+      state.listaFornecedores = state.listaFornecedores.filter(fornecedor => fornecedor.cnpj !== action.payload.cnpj);
     },
     atualizarFornecedor: (state, action) => {
-      const listaTemporariaFornecedores = state.listaFornecedores.filter(fornecedor => fornecedor.id !== action.payload.id);
+      const listaTemporariaFornecedores = state.listaFornecedores.filter(fornecedor => fornecedor.cnpj !== action.payload.cnpj);
       state.listaFornecedores = [...listaTemporariaFornecedores, action.payload];
     }
   }

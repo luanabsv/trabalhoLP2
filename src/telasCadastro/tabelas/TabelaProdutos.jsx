@@ -34,7 +34,7 @@ export default function TabelaProdutos(props) {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>ID</th>
+            <th>Código</th>
             <th>Nome</th>
             <th>Descrição</th>
             <th>Preço</th>
@@ -44,8 +44,8 @@ export default function TabelaProdutos(props) {
         <tbody>
           {listaProdutos.map((produto) => {
             return (
-              <tr key={produto.id}>
-                <td>{produto.id}</td>
+              <tr key={produto.cod}>
+                <td>{produto.cod}</td>
                 <td>{produto.nome}</td>
                 <td>{produto.descricao}</td>
                 <td>{produto.preco}</td>

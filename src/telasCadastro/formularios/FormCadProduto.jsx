@@ -5,7 +5,7 @@ import { adicionarProduto, atualizarProduto } from "../../redux/produtoReducer";
 
 export default function FormCadProduto(props) {
   const produtoVazio = {
-    id: '',
+    cod: '',
     nome: '',
     descricao: '',
     preco: 0,
@@ -45,6 +45,24 @@ export default function FormCadProduto(props) {
   return (
     <Container>
       <Form noValidate validated={formValidado} onSubmit={manipularSubmissao}>
+      <Row>
+          <Col>
+            <Form.Group>
+              <Form.Label>Código do Produto:</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Código do produto"
+                name="cod"
+                value={produto.cod}
+                onChange={manipularMudancas}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                Informe o nome do produto!
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Col>
+        </Row>
         <Row>
           <Col>
             <Form.Group>

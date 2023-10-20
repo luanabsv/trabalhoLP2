@@ -44,6 +44,24 @@ export default function FormCadCategoria(props) {
   return (
     <Container>
       <Form noValidate validated={formValidado} onSubmit={manipularSubmissao}>
+      <Row>
+          <Col>
+            <Form.Group>
+              <Form.Label>ID Categoria</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="ID da categoria"
+                name="id"
+                value={categoria.id}
+                onChange={manipularMudancas}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                Informe o nome da categoria!
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Col>
+        </Row>
         <Row>
           <Col>
             <Form.Group>

@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import ESTADO from '../recursos/estado';
 
 const categoriaSlice = createSlice({
   name: 'categoria',

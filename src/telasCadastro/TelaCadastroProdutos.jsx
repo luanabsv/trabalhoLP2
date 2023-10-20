@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function TelaCadastroProduto(props) {
   const [exibirFormulario, setExibirFormulario] = useState(false);
   const [produtoParaEdicao, setProdutoParaEdicao] = useState({
-    id: '',
+    cod: '',
     nome: '',
     descricao: '',
     preco: 0,
